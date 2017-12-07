@@ -1,6 +1,7 @@
 require 'capybara'
 require 'rspec'
 require 'capybara/rspec'
+require './lib/player.rb'
 # require_relative '../views/attack'
 require_relative '../app.rb'
 require_relative './features/web_helpers.rb'

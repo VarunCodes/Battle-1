@@ -2,7 +2,7 @@ require 'sinatra/base'
 
 class Battle < Sinatra::Base
   set :session_secret, 'crazy super duper secret'
-  enable :sessions
+
 
   get '/' do
     erb(:index)
@@ -10,21 +10,21 @@ class Battle < Sinatra::Base
   end
 
   post '/names' do
-    session[:player_one] = params[:player_one]
-    session[:player_two] = params[:player_two]
+    $player_one = Player.new(params[:player_one])
+    $player_two = Player.new(params[:player_two])
     redirect '/play'
   end
 
   get '/play' do
-    @player_one = session[:player_one]
-    @player_two = session[:player_two]
+    @player_one = $player_one.name
+    @player_two = $player_two.name
     # p params
     erb(:play)
   end
 
   get '/attack' do
-    @player_one = session[:player_one]
-    @player_two = session[:player_two]
+    @player_one = $player_one.name
+    @player_two = $player_two.name
     erb(:attack)
     # redirect '/play'
   end
